@@ -1,30 +1,27 @@
-import pytest
-from src.calculations import area_of_circle, get_nth_fibonacci
+# System Modules
+import math
 
-# ---------- area_of_circle ----------
-
-def test_area_of_circle_positive():
-    assert area_of_circle(2) == pytest.approx(12.566, rel=1e-3)
-
-def test_area_of_circle_zero():
-    assert area_of_circle(0) == 0
-
-def test_area_of_circle_negative():
-    with pytest.raises(ValueError):
-        area_of_circle(-1)
+# Installed Modules
+# - None
 
 
-# ---------- fibonacci ----------
+def area_of_circle(radius):
+    """Calculate the area of a circle given its radius."""
+    if radius < 0:
+        raise ValueError("Radius cannot be negative")
+    return math.pi * radius ** 2
 
-def test_fibonacci_zero():
-    assert get_nth_fibonacci(0) == 0
 
-def test_fibonacci_one():
-    assert get_nth_fibonacci(1) == 1
-
-def test_fibonacci_normal():
-    assert get_nth_fibonacci(6) == 8
-
-def test_fibonacci_negative():
-    with pytest.raises(ValueError):
-        get_nth_fibonacci(-5)
+def get_nth_fibonacci(n):
+    """Calculate the nth Fibonacci number."""
+    if n < 0:
+        raise ValueError("n cannot be negative")
+    elif n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+        return b
